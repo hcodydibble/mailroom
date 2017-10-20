@@ -3,4 +3,4 @@
 
 def main():
     """."""
-    print('Main func!!')
+    return 'Main func!!'
