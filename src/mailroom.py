@@ -70,3 +70,16 @@ def main_dash_navigator(user_input):
         quit()
     if user_input not in ['1', '2', '3']:
         main_dash_navigator(get_user_input('Invalid entry.\n\n>> '))
+
+
+def donor_data_aggregator(donor_db):
+    """Fill and return a list of donors sorted by total donation amount."""
+    donor_info = []
+    for donor in donor_db:
+        donor_name = donor['name']
+        amount_of_donations = len(donor['amt'])
+        total_donations = sum(donor['amt'])
+        avg_donation = total_donations / amount_of_donations
+        donor_info.append([donor_name, amount_of_donations,
+                           total_donations, avg_donation])
+    return sorted(donor_info, key=lambda x: x[-2], reverse=True)
