@@ -1,11 +1,14 @@
 """Python based package to automate charity donor emails and reports."""
 
-DONOR_DATABASE = {}
+DONOR_DATABASE = {'gabe': [10, 25, 100, 2],
+                  'cody': [12, 3, 94, 0.50],
+                  'kavdi': [100, 520.27]}
 
 
 def main():
     """Main handler function for charity thank you email and report creator."""
-    pass
+    mail_room_greeter()
+    first_user_choice()
 
 
 def create_a_report():
@@ -18,16 +21,16 @@ def send_a_thank_you():
     pass
 
 
-def get_user_input():
+def get_user_input(text):
     """Get and return user input with py2/3 version handling."""
     try:
-        user_input = raw_input('py2')
+        user_input = raw_input(text)
     finally:
-        user_input = input('py3')
+        user_input = input(text)
     return user_input
 
 
-def mail_room_greeter():
+def mail_room_greeter():  # pragma: no cover
     """Splash page and instructions for mailroom package."""
     header = """
     #======================================#
@@ -43,3 +46,13 @@ def mail_room_greeter():
   email to one of our generous donors or display\n\
   an ordered list of all of our benefactors."
     print(header, instructions)
+
+
+def first_user_choice():
+    """Ask user to either enter Send a Thank You or Create a Report."""
+    question_for_user = """Please select from the following options:
+
+    1. Send a Thank You
+    2. Create a Report
+    3. Exit"""
+    print(question_for_user)
