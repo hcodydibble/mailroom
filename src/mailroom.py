@@ -1,8 +1,8 @@
 """Python based package to automate charity donor emails and reports."""
 
-DONOR_DATABASE = {'gabe': [10, 25, 100, 2],
-                  'cody': [12, 3, 94, 0.50],
-                  'kavdi': [100, 520.27]}
+DONOR_DATABASE = [{'name': 'gabe', 'amt': [10, 25, 100, 2]},
+                  {'name': 'cody', 'amt': [12, 3, 94, 0.50]},
+                  {'name': 'kavid', 'amt': [100, 520.27]}]
 
 
 def main():
