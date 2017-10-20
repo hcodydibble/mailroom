@@ -1,5 +1,4 @@
 """Python based package to automate charity donor emails and reports."""
-import sys 
 
 DONOR_DATABASE = {'gabe': [10, 25, 100, 2],
                   'cody': [12, 3, 94, 0.50],
@@ -68,6 +67,6 @@ def main_dash_navigator(user_input):
     if user_input == '2':
         create_a_report()
     if user_input == '3':
-        sys.exit()
+        quit()
     if user_input not in ['1', '2', '3']:
         main_dash_navigator(get_user_input('Invalid entry.\n\n>> '))
