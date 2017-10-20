@@ -25,3 +25,21 @@ def get_user_input():
     finally:
         user_input = input('py3')
     return user_input
+
+
+def mail_room_greeter():
+    """Splash page and instructions for mailroom package."""
+    header = """
+    #======================================#
+    |                                      |
+    |                                      |
+    |          MAILROOM MADNESS            |
+    |                V 0.1                 |
+    |                                      |
+    #======================================#
+    """
+    instructions = "\n\n  Welcome to the mailroom automation package\n\
+  from here you will be able to send a thank you\n\
+  email to one of our generous donors or display\n\
+  an ordered list of all of our benefactors."
+    print(header, instructions)
