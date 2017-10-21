@@ -2,7 +2,7 @@
 
 DONOR_DATABASE = [{'name': 'gabe', 'amt': [10, 25, 100, 2]},
                   {'name': 'cody', 'amt': [12, 3, 94, 0.50]},
-                  {'name': 'kavid', 'amt': [100, 520.27]}]
+                  {'name': 'kavdi', 'amt': [100, 520.27]}]
 
 
 def main():
@@ -15,7 +15,15 @@ def main():
 
 def create_a_report():
     """"Create sorted report of donors with donation data."""
-    pass
+    sorted_donors = donor_data_aggregator(DONOR_DATABASE)
+    print('\n@' + '=' * 44 + '@')
+    print('|' + ' ' * 21 + '|' + ' ' * 5 + '|' + ' ' * 8 + '|' + ' ' * 7 + '|')
+    print('|{:^20} | {:>3} | {:>6} | {:^6}|'.format('DONOR NAME', 'AMT', 'TOTAL', 'AVG'))
+    print('|' + ' ' * 21 + '|' + ' ' * 5 + '|' + ' ' * 8 + '|' + ' ' * 7 + '|')
+    print('|' + '=' * 44 + '|')
+    for donor in sorted_donors:
+        print(f'|{donor[0].title():<20} | {donor[1]:>3} | {donor[2]:>6.2f} | {donor[3]:>6.2f}|')
+    print('@' + '=' * 44 + '@\a')
 
 
 def send_a_thank_you():
