@@ -36,7 +36,28 @@ def create_a_report():
 
 def send_a_thank_you():
     """"Return a thank you letter for a specified donor."""
-    pass
+    donor_name = get_user_input("Please input donor name:\n>> ")
+    if donor_name == "list":
+        donor_list_gen()
+    for donor in DONOR_DATABASE:
+        if donor_name == donor["name"]:
+            donation_validator(donor_name)
+        else:
+            DONOR_DATABASE.append({'name': donor_name, 'amt': []})
+            donation_validator(donor_name)
+
+
+def donation_validator(donor_name):
+    """Validate and inputs donation."""
+    donation = float(get_user_input("What is the donation ammount:\n>> "))
+    if isinstance(donation, (int, float)) and donation > 0:
+        for donor in DONOR_DATABASE:
+            if donor['name'] == donor_name:
+                donor['amt'].append(donation)
+                thank_you_writer(donor_name, donation)
+                main_prompt()
+    else:
+        donation_validator(donor_name) 
 
 
 def get_user_input(text):
@@ -100,6 +121,30 @@ def donor_data_aggregator(donor_db):
                            total_donations, avg_donation])
     return sorted(donor_info, key=lambda x: x[-2], reverse=True)
 
+
+def donor_list_gen():
+    """Displays list of donor names."""
+    donor_names = [donor['name'] for donor in DONOR_DATABASE]
+    for name in donor_names:
+        print(name)
+    send_a_thank_you()
+
+
+def thank_you_writer(donor_name, amt):
+    """Send a thank you 'email' to a donor."""
+    email_template = """
+    Dear {},
+    
+    We at the society for lost and unloved pokemons thank you 
+    for your generous donation of ${}. Your donation will
+    go towards rehabilitating injured pokemons and finding 
+    them new loving homes.
+
+    V/R
+    Professor Oak
+
+    """.format(donor_name, amt)
+    print(email_template)
 
 if __name__ == '__main__':
     main()
