@@ -6,8 +6,13 @@ DONOR_DATABASE = [{'name': 'gabe', 'amt': [10, 25, 100, 2]},
 
 
 def main():
-    """Main handler function for charity thank you email and report creator."""
+    """Initial display function and handler."""
     mail_room_greeter()
+    main_prompt()
+
+
+def main_prompt():
+    """Main prompt handler function for charity thank you email and report creator."""
     first_user_choice()
     user_choice = get_user_input('\n>> ')
     main_dash_navigator(user_choice)
@@ -16,14 +21,17 @@ def main():
 def create_a_report():
     """"Create sorted report of donors with donation data."""
     sorted_donors = donor_data_aggregator(DONOR_DATABASE)
-    print('\n@' + '=' * 44 + '@')
-    print('|' + ' ' * 21 + '|' + ' ' * 5 + '|' + ' ' * 8 + '|' + ' ' * 7 + '|')
-    print('|{:^20} | {:>3} | {:>6} | {:^6}|'.format('DONOR NAME', 'AMT', 'TOTAL', 'AVG'))
-    print('|' + ' ' * 21 + '|' + ' ' * 5 + '|' + ' ' * 8 + '|' + ' ' * 7 + '|')
-    print('|' + '=' * 44 + '|')
+    header = """
+    @============================================@
+    |                     |     |        |       |
+    |     DONOR NAME      | AMT | TOTAL  |  AVG  |
+    |                     |     |        |       |
+    @============================================@"""
+    print(header)
     for donor in sorted_donors:
-        print(f'|{donor[0].title():<20} | {donor[1]:>3} | {donor[2]:>6.2f} | {donor[3]:>6.2f}|')
-    print('@' + '=' * 44 + '@\a')
+        print(f'    |{donor[0].title():<20} | {donor[1]:>3} | {donor[2]:>6.2f} | {donor[3]:>6.2f}|')
+    print('    @' + '=' * 44 + '@\a')
+    main_prompt()
 
 
 def send_a_thank_you():
@@ -75,7 +83,7 @@ def main_dash_navigator(user_input):
     if user_input == '2':
         create_a_report()
     if user_input == '3':
-        quit()
+        exit()
     if user_input not in ['1', '2', '3']:
         main_dash_navigator(get_user_input('Invalid entry.\n\n>> '))
 
@@ -91,3 +99,7 @@ def donor_data_aggregator(donor_db):
         donor_info.append([donor_name, amount_of_donations,
                            total_donations, avg_donation])
     return sorted(donor_info, key=lambda x: x[-2], reverse=True)
+
+
+if __name__ == '__main__':
+    main()
