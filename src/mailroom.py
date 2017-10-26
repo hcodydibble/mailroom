@@ -39,10 +39,10 @@ def create_a_report():  # pragma: no cover
 def send_a_thank_you():  # pragma: no cover
     """"Return a thank you letter for a specified donor."""
     donor_name = get_user_input("Please input donor name:\n>> ")
-    if donor_name == "list":
+    if donor_name.lower() == "list":
         donor_list_gen(DONOR_DATABASE)
     for donor in DONOR_DATABASE:
-        if donor_name == donor["name"]:
+        if donor_name.lower() == donor["name"].lower():
             donation_validator(donor_name)
         else:
             DONOR_DATABASE.append({'name': donor_name, 'amt': []})
