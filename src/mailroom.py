@@ -13,13 +13,13 @@ def main():  # pragma: no cover
 
 
 def main_prompt():  # pragma: no cover
-    """Main prompt handler function for charity thank you email and report creator."""
+    """Main prompt handler for charity thank you email and report creator."""
     first_user_choice()
     user_choice = get_user_input('\n>> ')
     main_dash_navigator(user_choice)
 
 
-def create_a_report():
+def create_a_report():  # pragma: no cover
     """"Create sorted report of donors with donation data."""
     sorted_donors = donor_data_aggregator(DONOR_DATABASE)
     header = """
@@ -28,10 +28,10 @@ def create_a_report():
     |     DONOR NAME      | AMT | TOTAL  |  AVG  |
     |                     |     |        |       |
     @============================================@"""
-    return header
     print(header)
     for donor in sorted_donors:  # pragma: no cover
-        print('    |{:<20} | {:>3} | {:>6.2f} | {:>6.2f}|'.format(donor[0].title(), donor[1], donor[2], donor[3]))
+        print('    |{:<20} | {:>3} | {:>6.2f} | {:>6.2f}|'.format(donor[0]
+              .title(), donor[1], donor[2], donor[3]))
     print('    @' + '=' * 44 + '@\a')
     main_prompt()
 
@@ -59,7 +59,7 @@ def donation_validator(donor_name):  # pragma: no cover
                 thank_you_writer(donor_name, donation)
                 main_prompt()
     else:
-        donation_validator(donor_name) 
+        donation_validator(donor_name)
 
 
 def get_user_input(text):  # pragma: no cover
@@ -71,7 +71,7 @@ def get_user_input(text):  # pragma: no cover
     return user_input
 
 
-def mail_room_greeter():  # pragma: no cover
+def mail_room_greeter():
     """Splash page and instructions for mailroom package."""
     header = """
     #======================================#
@@ -81,13 +81,14 @@ def mail_room_greeter():  # pragma: no cover
     |                V 0.1                 |
     |                                      |
     #======================================#
-    """
-    instructions = "\n\n  Welcome to the mailroom automation package\n\
-  from here you will be able to send a thank you\n\
-  email to one of our generous donors or display\n\
-  an ordered list of all of our benefactors.\n"
-    print(header, instructions)
-    return instructions
+
+
+    Welcome to the mailroom automation package
+    from here you will be able to send a thank you
+    email to one of our generous donors or display
+    an ordered list of all of our benefactors."""
+    print(header)
+    return header
 
 
 def first_user_choice():  # pragma: no cover
@@ -137,10 +138,10 @@ def thank_you_writer(donor_name, amt):
     """Send a thank you 'email' to a donor."""
     email_template = """
     Dear {},
-    
-    We at the society for lost and unloved pokemons thank you 
+
+    We at the society for lost and unloved pokemons thank you
     for your generous donation of ${}. Your donation will
-    go towards rehabilitating injured pokemons and finding 
+    go towards rehabilitating injured pokemons and finding
     them new loving homes.
 
     V/R
