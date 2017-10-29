@@ -51,14 +51,15 @@ def send_a_thank_you():  # pragma: no cover
 
 def donation_validator(donor_name):  # pragma: no cover
     """Validate and inputs donation."""
-    donation = float(get_user_input("What is the donation ammount:\n>> "))
-    if isinstance(donation, (int, float)) and donation > 0:
+    try:
+        donation = float(get_user_input("What is the donation ammount:\n>> "))
         for donor in DONOR_DATABASE:
-            if donor['name'] == donor_name:
+            if donor['name'].lower() == donor_name.lower():
                 donor['amt'].append(donation)
                 thank_you_writer(donor_name, donation)
                 main_prompt()
-    else:
+    except ValueError:
+        print("-- Please enter a positive number --")
         donation_validator(donor_name)
 
 
@@ -117,12 +118,15 @@ def donor_data_aggregator(donor_db):
     """Fill and return a list of donors sorted by total donation amount."""
     donor_info = []
     for donor in donor_db:
-        donor_name = donor['name']
-        amount_of_donations = len(donor['amt'])
-        total_donations = sum(donor['amt'])
-        avg_donation = total_donations / amount_of_donations
-        donor_info.append([donor_name, amount_of_donations,
-                           total_donations, avg_donation])
+        if donor['amt'] == []:
+            del donor_db[-1]
+        else:
+            donor_name = donor['name']
+            amount_of_donations = len(donor['amt'])
+            total_donations = sum(donor['amt'])
+            avg_donation = total_donations / amount_of_donations
+            donor_info.append([donor_name, amount_of_donations,
+                               total_donations, avg_donation])
     return sorted(donor_info, key=lambda x: x[-2], reverse=True)
 
 
